@@ -1,0 +1,108 @@
+/*
+   -característica de CSS3)
+   key*/
+:root {
+  --color-primario: #028090;
+  --color-acento: #02c39a;
+  --color-texto: #1a1a1a;
+  --color-fondo: #f4faf9;
+  --sombra: 0 10px 25px rgba(2, 32, 36, 0.15);
+}
+
+/* RESET BÁSICO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ESTILO GENERAL DEL FONDO */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: white;
+}
+
+/* 
+   FLEXBOX (característica de CSS3)
+   Convertimos este contenedor en una "caja flexible".
+*/
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/*ESTILO DE LA TARJETA */
+.tarjeta {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  width: 280px;
+  text-align: center;
+}
+
+/* 
+   FOTO DE PERFIL CIRCULAR */
+.tarjeta__foto {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-acento);
+  margin-bottom: 1rem;
+}
+
+/* TRANSICIÓN (característica de CSS3)*/
+.tarjeta {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* EFECTO HOVER (se activa al pasar el mouse) */
+.tarjeta:hover {
+  transform: scale(1.05) translateY(-6px);
+  box-shadow: 0 18px 35px rgba(2, 32, 36, 0.25);
+}
+
+/*BOTÓN "VER PERFIL"*/
+.tarjeta__boton {
+  background: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* HOVER DEL BOTÓN */
+.tarjeta__boton:hover {
+  background: var(--color-acento);
+}
+
+/* MEDIA QUERY (característica de CSS3 = diseño responsivo) */
+@media (max-width: 480px) {
+  .tarjeta {
+    width: 100%;
+    padding: 1.25rem;
+  }
+
+  .tarjeta__foto {
+    width: 76px;
+    height: 76px;
+  }
+}
+
+/*
+   GRADIENTE DE TEXTO (extra visual de CSS3)
+   linear-gradient crea una transición de color de
+   izquierda a derecha (90deg) entre nuestros dos
+   colores principales. */
+.tarjeta__nombre {
+  background: linear-gradient(90deg, var(--color-primario), var(--color-acento));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.25rem;
+}
