@@ -1,0 +1,26 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+  font-size: 18px;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #000;
+    margin-left: 10px;
+}
+
+button {
+    padding: 2px 2px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+}
