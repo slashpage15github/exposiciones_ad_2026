@@ -1,0 +1,53 @@
+/* Estilos generales para centrar todo bonito */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.tarjeta {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* La caja que vamos a animar con JavaScript */
+#cajaMagica {
+    width: 80px;
+    height: 80px;
+    background-color: #ff5722;
+    margin: 20px auto 0 auto;
+    border-radius: 8px;
+    transition: all 0.6s ease-in-out; /* Define la suavidad de la animación */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center;
+}
+
+#cajaMagica img {
+    max-width: 85%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+}
