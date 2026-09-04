@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica con jQuery</title>
+    <link rel="stylesheet" href="css/jqueryestilo.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Práctica con jQuery</h1>
+        <div class="card">
+            <h2>Lista de tareas</h2>
+            <div class="input-group">
+                <input type="text" id="tareaInput" placeholder="Escribe una tarea...">
+                <button id="agregarBtn">Agregar nueva tarea</button>
+            </div>
+            <ul id="listaTareas">
+                <li>Aprender jQuery<button class="eliminar-btn">Eliminar</button></li>
+                <li>Hacer ejercicio de práctica<button class="eliminar-btn">Eliminar</button></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>Efectos y animaciones</h2>
+            <div id="cajaAnimada" class="caja">
+                <p>Pasa el mouse aquí</p>
+            </div>
+            <div class="button-group">
+                <button id="toggleBtn">Mostrar/Ocultar</button>
+                <button id="fadeBtn">Desvanecer</button>
+                <button id="slideBtn">Deslizar</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Contador de clics</h2>
+            <p>Has hecho clic: <span id="contador">0</span> veces</p>
+            <div class="button-group">
+                <button id="contarBtn">¡Haz clic!</button>
+                <button id="resetBtn">Reiniciar contador</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Peticiones Asíncronas (AJAX)</h2>
+            <div class="button-group ajax-buttons">
+                <button id="cargarUsuarios" class="btn-ajax">Cargar Usuarios</button>
+                <button id="cargarHTML" class="btn-ajax">Cargar Post</button>
+                <button id="cargarMultiple" class="btn-ajax">Cargar Múltiple</button>
+                <button id="limpiarResultados" class="btn-ajax btn-danger">Limpiar</button>
+            </div>
+            <div class="post-form">
+                <h4>Crear nuevo post:</h4>
+                <input type="text" id="postTitulo" placeholder="Título del post">
+                <input type="text" id="postCuerpo" placeholder="Contenido del post">
+                <button id="crearPost" class="btn-ajax btn-success">Enviar Post</button>
+                <div id="resultadoPost" class="resultado-box"></div>
+            </div>
+            <div id="resultadoUsuarios" class="resultado-box"></div>
+            <div id="contenidoCargado" class="resultado-box"></div>
+            <div id="resultadoMultiple" class="resultado-box"></div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
