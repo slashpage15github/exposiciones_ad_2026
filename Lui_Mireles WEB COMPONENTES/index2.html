@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Práctica Avanzada - Web Components</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      padding: 20px;
+    }
+
+    /* Contenedor en cuadrícula para acomodar las tarjetas */
+    .grid-tarjetas {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="text-align: center;">Demostración: 7 Componentes Independientes</h1>
+
+  <!-- 1. PLANTILLA HTML + CSS + EVENTOS -->
+  <template id="plantilla-perfil">
+    <style>
+      .card {
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 16px;
+        width: 250px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        transition: transform 0.2s;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #007bff;
+      }
+      .info {
+        text-align: center;
+      }
+      h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #fff;
+      }
+      p {
+        margin: 6px 0 0 0;
+        color: #aaa;
+        font-size: 0.85rem;
+      }
+      button {
+        background-color: #e63946;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: transform 0.1s, background-color 0.2s;
+      }
+      button:hover {
+        background-color: #d62839;
+      }
+      button:active {
+        transform: scale(0.95);
+      }
+    </style>
+
+    <div class="card">
+      <img id="avatar" src="" alt="Foto de perfil">
+      <div class="info">
+        <h3 id="usuario">Usuario</h3>
+        <p><slot name="descripcion">Sin descripción disponible.</slot></p>
+      </div>
+      <button id="btn-like">❤️ Me gusta (<span id="likes">0</span>)</button>
+    </div>
+  </template>
+
+  <!-- 2. USO DE LOS CUSTOM ELEMENTS (7 TARJETAS) -->
+  <div class="grid-tarjetas">
+    
+    <tarjeta-perfil 
+      usuario="Lui Mireles" 
+      foto="https://picsum.photos/id/1005/200">
+      <span slot="descripcion">Estudiante de Ingeniería en Sistemas.</span>
+    </tarjeta-perfil>
+
+    <tarjeta-perfil 
+      usuario="Valeria" 
+      foto="https://picsum.photos/id/1027/200">
+      <span slot="descripcion">Desarrolladora Frontend & UI Designer.</span>
+    </tarjeta-perfil>
+
+
+    <tarjeta-perfil 
+      usuario="Nubia" 
+      foto="https://picsum.photos/id/64/200">
+      <span slot="descripcion">Especialista en Ciberseguridad y Redes.</span>
+    </tarjeta-perfil>
+
+    <tarjeta-perfil 
+      usuario="Santiago " 
+      foto="https://picsum.photos/id/1012/200">
+      <span slot="descripcion">Administrador de Bases de Datos.</span>
+    </tarjeta-perfil>
+
+    <tarjeta-perfil 
+      usuario="Ximena " 
+      foto="https://picsum.photos/id/338/200">
+      <span slot="descripcion">Creadora de Contenido & DevRel.</span>
+    </tarjeta-perfil>
+
+    <tarjeta-perfil 
+      usuario="Rafael de Jesus" 
+      foto="https://picsum.photos/id/1062/200">
+      <span slot="descripcion">Arquitecto de Soluciones Cloud.</span>
+    </tarjeta-perfil>
+
+  </div>
+
+  <!-- 3. LÓGICA DEL CUSTOM ELEMENT EN JAVASCRIPT -->
+  <script>
+    class TarjetaPerfil extends HTMLElement {
+      constructor() {
+        super();
+        this.likes = 0; // Cada tarjeta guarda sus propios likes
+
+        // Crear Shadow DOM
+        const shadow = this.attachShadow({ mode: 'open' });
+
+        // Clonar Plantilla
+        const plantilla = document.getElementById('plantilla-perfil');
+        shadow.appendChild(plantilla.content.cloneNode(true));
+      }
+
+      connectedCallback() {
+        // Capturar atributos
+        const foto = this.getAttribute('foto') || 'https://via.placeholder.com/80';
+        const usuario = this.getAttribute('usuario') || 'Usuario Anónimo';
+
+        // Inyectar en la plantilla interna
+        this.shadowRoot.getElementById('avatar').src = foto;
+        this.shadowRoot.getElementById('usuario').textContent = usuario;
+
+        // Evento de clic para el botón de Like
+        const btnLike = this.shadowRoot.getElementById('btn-like');
+        const contador = this.shadowRoot.getElementById('likes');
+
+        btnLike.addEventListener('click', () => {
+          this.likes++;
+          contador.textContent = this.likes;
+        });
+      }
+    }
+
+    // Registrar la etiqueta personalizada
+    customElements.define('tarjeta-perfil', TarjetaPerfil);
+  </script>
+
+</body>
+</html> 

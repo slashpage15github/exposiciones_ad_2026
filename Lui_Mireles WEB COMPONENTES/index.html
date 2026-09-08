@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Práctica Web Components</title>
+  <style>
+    /* Estilo global que NO afectará al componente gracias al Shadow DOM */
+    p {
+      color: rgb(236, 7, 7);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Demostración de Web Component Nativo</h1>
+  
+  <p>Este párrafo global es ROJO.</p>
+
+  <!-- 1. Plantilla reutilizable (HTML Template) -->
+  <template id="plantilla-tarjeta">
+    <style>
+      /* Estilos internos del componente (Shadow DOM) */
+      .card {
+        border: 2px solid #2b2b2b;
+        border-radius: 10px;
+        padding: 16px;
+        width: 250px;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      }
+      h3 {
+        margin: 0 0 8px 0;
+        color: #1a73e8;
+      }
+      p {
+        color: #555555;
+        margin: 0;
+      }
+    </style>
+
+    <div class="card">
+      <h3><slot name="nombre">Nombre por defecto</slot></h3>
+      <p><slot name="rol">Rol por defecto</slot></p>
+    </div>
+  </template>
+
+  <!-- Usando nuestra etiqueta personalizada (Custom Element) -->
+  <tarjeta-usuario>
+    <span slot="nombre">Lui Mireles</span>
+    <span slot="rol">Estudiante de Sistemas</span>
+  </tarjeta-usuario>
+
+  <br>
+
+  <tarjeta-usuario>
+    <span slot="nombre">Ana López</span>
+    <span slot="rol">Desarrolladora Web</span>
+  </tarjeta-usuario>
+
+  <script>
+    // 2. Definición del Custom Element con JavaScript
+    class TarjetaUsuario extends HTMLElement {
+      constructor() {
+        super();
+        
+        // Crear el Shadow DOM
+        const shadow = this.attachShadow({ mode: 'open' });
+        
+        // Clonar el contenido del <template>
+        const plantilla = document.getElementById('plantilla-tarjeta');
+        const contenido = plantilla.content.cloneNode(true);
+        
+        // Agregar la plantilla al Shadow DOM
+        shadow.appendChild(contenido);
+      }
+    }
+
+    // Registrar el componente con el navegador
+    customElements.define('tarjeta-usuario', TarjetaUsuario);
+  </script>
+
+</body>
+</html>
