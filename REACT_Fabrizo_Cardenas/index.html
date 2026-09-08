@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica React en HTML</title>
+    <!-- 1. Cargar React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- 2. Cargar Babel para compilar JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body style="font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto;">
+    <h1>Mi sitio web tradicional</h1>
+    <p>Todo esto es HTML estático normal. El recuadro de abajo es inyectado dinámicamente:</p>
+
+    <!-- 3. El contenedor donde React "montará" el componente -->
+   <div id="contenedor-react"></div>
+
+    <!-- 4. Conectar nuestro archivo JSX (nota el type="text/babel") -->
+    <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
