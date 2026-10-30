@@ -1,0 +1,28 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f4f6f8; color: #222; }
+header { background: #1f3a5f; color: #fff; padding: 16px 32px; display: flex;
+         justify-content: space-between; align-items: center; flex-wrap: wrap; }
+header h1 { margin: 0; font-size: 1.4rem; }
+header small { font-weight: normal; opacity: .7; font-size: .8rem; margin-left: 8px; }
+nav a { color: #fff; margin-left: 16px; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #e5e8eb; }
+th { background: #e9eef4; }
+.acciones { display: flex; gap: 8px; }
+.acciones form { margin: 0; }
+.btn { background: #2f6fed; color: #fff; border: 0; padding: 6px 12px; border-radius: 6px;
+       cursor: pointer; text-decoration: none; font-size: .9rem; }
+.btn.peligro { background: #d64545; }
+.buscador { display: flex; gap: 8px; margin-bottom: 16px; }
+.buscador input { flex: 1; padding: 8px; border: 1px solid #ccd; border-radius: 6px; }
+.buscador button { padding: 8px 16px; border: 0; background: #1f3a5f; color: #fff; border-radius: 6px; cursor: pointer; }
+.tarjetas { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.tarjeta { background: #fff; padding: 14px; border-radius: 8px; }
+.tarjeta h3 { margin: 0 0 4px; }
+.tarjeta p { margin: 2px 0; color: #555; }
+.formulario { background: #fff; padding: 20px; border-radius: 8px; max-width: 420px;
+              display: flex; flex-direction: column; gap: 14px; }
+.formulario label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.formulario input, .formulario select { padding: 8px; border: 1px solid #ccd; border-radius: 6px; font-size: 1rem; }

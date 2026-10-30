@@ -1,0 +1,20 @@
+{% extends "libros/base.html" %}
+{% block titulo %}Añadir autor | Biblioteca{% endblock %}
+{% block contenido %}
+<div class="page-heading">
+    <div>
+        <h1>Añadir un autor</h1>
+        <p class="muted">Registra un autor para asociarlo a tus libros.</p>
+    </div>
+</div>
+<section class="panel form-panel">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <div class="form-actions">
+            <button type="submit">Guardar autor</button>
+            <a class="button secondary" href="{% url 'index' %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

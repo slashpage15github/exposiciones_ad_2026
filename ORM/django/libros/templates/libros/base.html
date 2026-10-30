@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}Biblioteca{% endblock %}</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            color: #172033;
+            background: #f4f7fb;
+            font-synthesis: none;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+            background: #f4f7fb;
+        }
+
+        .site-header {
+            background: #13233f;
+            color: #fff;
+            box-shadow: 0 4px 18px rgb(19 35 63 / 15%);
+        }
+
+        .nav-wrap, main {
+            width: min(1080px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .nav-wrap {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            color: #fff;
+            font-size: 1.15rem;
+            font-weight: 750;
+            letter-spacing: .02em;
+            text-decoration: none;
+        }
+
+        nav { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        nav a {
+            color: #dce7f8;
+            text-decoration: none;
+            padding: 9px 13px;
+            border-radius: 8px;
+            font-size: .94rem;
+        }
+
+        nav a:hover, nav a:focus-visible { background: #253b5e; color: #fff; }
+        nav a.primary-link { background: #4f7cff; color: #fff; }
+        nav a.primary-link:hover, nav a.primary-link:focus-visible { background: #3e68df; }
+
+        main { padding: 38px 0 64px; }
+
+        .page-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        h1, h2 { margin: 0; color: #172033; }
+        h1 { font-size: clamp(1.7rem, 4vw, 2.25rem); letter-spacing: -.035em; }
+        h2 { font-size: 1.25rem; }
+        .muted { color: #68758a; margin: 8px 0 0; }
+
+        .panel {
+            background: #fff;
+            border: 1px solid #e3e9f2;
+            border-radius: 14px;
+            box-shadow: 0 8px 28px rgb(31 48 78 / 5%);
+            padding: 22px;
+            margin-bottom: 24px;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .search-form { display: flex; gap: 8px; width: min(100%, 430px); }
+        input, select {
+            width: 100%;
+            min-height: 42px;
+            border: 1px solid #cbd5e3;
+            border-radius: 8px;
+            padding: 9px 12px;
+            background: #fff;
+            color: #172033;
+            font: inherit;
+        }
+
+        input:focus, select:focus {
+            outline: 3px solid rgb(79 124 255 / 20%);
+            border-color: #4f7cff;
+        }
+
+        button, .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 9px 14px;
+            border: 0;
+            border-radius: 8px;
+            background: #4f7cff;
+            color: #fff;
+            font: inherit;
+            font-weight: 650;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        button:hover, .button:hover { background: #3e68df; }
+        .button.secondary { background: #edf2fa; color: #34445f; }
+        .button.secondary:hover { background: #dfe7f3; }
+        button.danger { background: #fff0ef; color: #b42318; min-height: 34px; padding: 6px 10px; }
+        button.danger:hover { background: #ffddda; }
+
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 13px 12px; border-bottom: 1px solid #edf0f5; }
+        th { color: #68758a; font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; }
+        tbody tr:last-child td { border-bottom: 0; }
+        tbody tr:hover { background: #fafbfe; }
+        .book-title { font-weight: 650; color: #172033; }
+        .actions { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+        .text-link { color: #315ed8; font-weight: 600; text-decoration: none; }
+        .text-link:hover { text-decoration: underline; }
+        .inline-form { display: inline; }
+        .empty-state { color: #68758a; text-align: center; padding: 26px 12px; }
+        .authors-list { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 18px 0 0; list-style: none; }
+        .authors-list li { background: #f3f6fb; border: 1px solid #e6ebf3; border-radius: 9px; padding: 10px 13px; }
+        .authors-list strong { display: block; margin-bottom: 3px; }
+        .form-panel { max-width: 680px; }
+        .form-panel form > div { margin-bottom: 18px; }
+        .form-panel label { display: block; margin-bottom: 7px; color: #34445f; font-weight: 650; }
+        .form-panel .helptext { display: block; margin-top: 6px; color: #68758a; font-size: .88rem; }
+        .errorlist { color: #b42318; margin: 7px 0 0; padding-left: 20px; }
+        .form-actions { display: flex; align-items: center; gap: 10px; margin-top: 22px; }
+
+        @media (max-width: 620px) {
+            .nav-wrap { align-items: flex-start; flex-direction: column; padding: 15px 0; gap: 10px; }
+            nav { width: 100%; }
+            nav a { padding: 8px 10px; }
+            main { padding-top: 26px; }
+            .page-heading, .toolbar { align-items: stretch; flex-direction: column; }
+            .search-form { width: 100%; }
+            .panel { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="{% url 'index' %}">Biblioteca</a>
+            <nav aria-label="Navegación principal">
+                <a href="{% url 'index' %}">Inicio</a>
+                <a class="primary-link" href="{% url 'nuevo_libro' %}">+ Añadir libro</a>
+                <a href="{% url 'nuevo_autor' %}">+ Añadir autor</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+</body>
+</html>

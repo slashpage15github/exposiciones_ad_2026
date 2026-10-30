@@ -1,0 +1,69 @@
+{% extends "libros/base.html" %}
+{% block titulo %}Libros | Biblioteca{% endblock %}
+{% block contenido %}
+<div class="page-heading">
+    <div>
+        <h1>Tu biblioteca</h1>
+        <p class="muted">Administra tus libros y autores en un solo lugar.</p>
+    </div>
+    <a class="button" href="{% url 'nuevo_libro' %}">+ Añadir libro</a>
+</div>
+
+<section class="panel" aria-labelledby="libros-heading">
+    <div class="toolbar">
+        <h2 id="libros-heading">Libros</h2>
+        <form class="search-form" method="get" role="search">
+            <input type="search" name="q" value="{{ q }}" placeholder="Buscar por título..." aria-label="Buscar libros">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Año</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for libro in libros %}
+                <tr>
+                    <td class="book-title">{{ libro.titulo }}</td>
+                    <td>{{ libro.anio|default_if_none:"—" }}</td>
+                    <td>{{ libro.autor.nombre }}</td>
+                    <td>
+                        <div class="actions">
+                            <a class="text-link" href="{% url 'editar_libro' libro.id %}">Editar</a>
+                            <form class="inline-form" method="post" action="{% url 'eliminar_libro' libro.id %}">
+                                {% csrf_token %}
+                                <button class="danger" type="submit">Eliminar</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td class="empty-state" colspan="4">No hay libros{% if q %} que coincidan con "{{ q }}"{% endif %}. Añade uno para comenzar.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel" aria-labelledby="autores-heading">
+    <h2 id="autores-heading">Autores</h2>
+    {% if autores %}
+    <ul class="authors-list">
+        {% for autor in autores %}
+        <li>
+            <strong>{{ autor.nombre }}</strong>
+            <span class="muted">{{ autor.pais|default:"País no indicado" }} · {{ autor.libros.count }} libro(s)</span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="muted">Todavía no hay autores registrados.</p>
+    {% endif %}
+</section>
+{% endblock %}

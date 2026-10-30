@@ -1,0 +1,20 @@
+{% extends "libros/base.html" %}
+{% block titulo %}{% if libro %}Editar libro{% else %}Añadir libro{% endif %} | Biblioteca{% endblock %}
+{% block contenido %}
+<div class="page-heading">
+    <div>
+        <h1>{% if libro %}Editar libro{% else %}Añadir un libro{% endif %}</h1>
+        <p class="muted">Completa los datos para mantener tu catálogo actualizado.</p>
+    </div>
+</div>
+<section class="panel form-panel">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <div class="form-actions">
+            <button type="submit">Guardar libro</button>
+            <a class="button secondary" href="{% url 'index' %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

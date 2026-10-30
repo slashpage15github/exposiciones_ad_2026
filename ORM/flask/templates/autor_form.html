@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block titulo %}Nuevo autor{% endblock %}
+
+{% block contenido %}
+<h2>Nuevo autor</h2>
+<form class="formulario" method="post">
+    <label>Nombre
+        <input type="text" name="nombre" required>
+    </label>
+    <label>País
+        <input type="text" name="pais">
+    </label>
+    <button class="btn" type="submit">Guardar</button>
+    <a href="{{ url_for('index') }}">Cancelar</a>
+</form>
+{% endblock %}

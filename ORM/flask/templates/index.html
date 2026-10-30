@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<form class="buscador" method="get" action="{{ url_for('index') }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Buscar libro por título...">
+    <button type="submit">Buscar</button>
+</form>
+
+<h2>Libros ({{ libros|length }})</h2>
+<table>
+    <thead>
+        <tr><th>Título</th><th>Año</th><th>Autor</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+        {% for libro in libros %}
+        <tr>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.anio }}</td>
+            <td>{{ libro.autor.nombre }}</td>
+            <td class="acciones">
+                <a class="btn" href="{{ url_for('editar_libro', libro_id=libro.id) }}">Editar</a>
+                <form method="post" action="{{ url_for('eliminar_libro', libro_id=libro.id) }}"
+                      onsubmit="return confirm('¿Eliminar este libro?');">
+                    <button class="btn peligro" type="submit">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">No hay libros.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Autores ({{ autores|length }})</h2>
+<div class="tarjetas">
+    {% for autor in autores %}
+    <div class="tarjeta">
+        <h3>{{ autor.nombre }}</h3>
+        <p>{{ autor.pais }}</p>
+        <p><strong>{{ autor.libros|length }}</strong> libro(s)</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
